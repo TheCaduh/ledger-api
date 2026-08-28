@@ -4,8 +4,12 @@ import com.eduardo_alves.ledger_api.dto.LancamentoRequest;
 import com.eduardo_alves.ledger_api.model.Lancamento;
 import com.eduardo_alves.ledger_api.repository.LancamentoRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
 
 @Service
 public class LancamentoService {
@@ -14,6 +18,7 @@ public class LancamentoService {
     }
 
     private final LancamentoRepository repository;
+
     public LancamentoRequest processarLancamento(LancamentoRequest request) {
         // 1. Verificamos se o valor é menor ou igual a zero
         if (request.valor().compareTo(BigDecimal.ZERO) <= 0) {
@@ -30,4 +35,9 @@ public class LancamentoService {
         repository.save(newLancamento);
         return request;
     }
+
+    public List<Lancamento> buscarTodos() {
+        return repository.findAll();
+    }
 }
+

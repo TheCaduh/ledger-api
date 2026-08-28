@@ -1,20 +1,20 @@
 package com.eduardo_alves.ledger_api.controller;
 
 import com.eduardo_alves.ledger_api.dto.LancamentoRequest;
+import com.eduardo_alves.ledger_api.model.Lancamento;
 import com.eduardo_alves.ledger_api.service.LancamentoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/lancamentos")
 public class LancamentoController {
     private final LancamentoService lancamentoService;
 
-public LancamentoController(LancamentoService lancamentoService) {
+    public LancamentoController(LancamentoService lancamentoService) {
         this.lancamentoService = lancamentoService;
     }
 
@@ -30,5 +30,10 @@ public LancamentoController(LancamentoService lancamentoService) {
 
         // 3. A Resposta de Sucesso para o Postman
         return ResponseEntity.status(HttpStatus.CREATED).body(request);
+    }
+
+    @GetMapping
+    public List<Lancamento> listarTodos() {
+        return lancamentoService.buscarTodos();
     }
 }

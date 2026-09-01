@@ -39,5 +39,9 @@ public class LancamentoService {
     public List<Lancamento> buscarTodos() {
         return repository.findAll();
     }
+
+    public Lancamento buscarPorId(Long id) {
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Ops! Lançamento não encontrado no cofre."));
+    }
 }
 

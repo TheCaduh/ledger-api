@@ -36,4 +36,12 @@ public class LancamentoController {
     public List<Lancamento> listarTodos() {
         return lancamentoService.buscarTodos();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Lancamento> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(lancamentoService.buscarPorId(id));
+    }
 }
+
+
+
